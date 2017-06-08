@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Zulu Warrior
-  Date: 5/19/2017
-  Time: 11:12 AM
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -27,7 +19,6 @@
 </div>
 
 <div class="well"><fmt:message key="description"/></div>
-
 <jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
 </body>
 </html>

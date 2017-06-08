@@ -15,7 +15,6 @@
 <div class="alert alert-danger">
     <strong><fmt:message key="error" /></strong> <fmt:message key="invalid.page" />
 </div>
-
-<jsp:include page="/WEB-INF/views/snippets/footer.jsp" />
+<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
 </body>
 </html>

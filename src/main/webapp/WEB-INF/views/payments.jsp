@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Zulu Warrior
-  Date: 5/31/2017
-  Time: 11:16 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -60,7 +53,10 @@
                         <tr>
                             <td><c:out value="${payment.getAccountFrom().getAccountNumber()}"/></td>
                             <td><c:out value="${payment.getAccountTo().getAccountNumber()}"/></td>
-                            <td><c:out value="${payment.getAmount()}"/></td>
+                            <td>
+                                <c:out value="${payment.getAmount()}"/>
+                                <fmt:message key="currency"/>
+                            </td>
                             <td><fmt:formatDate type = "both" value="${payment.getDate()}"/></td>
                         </tr>
                     </c:forEach>
@@ -76,4 +72,6 @@
 
     </div>
 </div>
-
+<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
+</body>
+</html>

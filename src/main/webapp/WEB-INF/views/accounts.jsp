@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Zulu Warrior
-  Date: 5/31/2017
-  Time: 11:14 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -68,7 +61,10 @@
                     <c:forEach var="account" items="${requestScope.accounts}">
                         <tr>
                             <td><c:out value="${account.getAccountNumber()}"/></td>
-                            <td><c:out value="${account.getBalance()}"/></td>
+                            <td>
+                                <c:out value="${account.getBalance()}"/>
+                                <fmt:message key="currency"/>
+                            </td>
                             <td><c:out value="${account.getStatus()}"/></td>
                             <td>
                                 <c:if test="${not sessionScope.user.isAdmin()}">
@@ -131,7 +127,6 @@
 
     </div>
 </div>
-
 <jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
 </body>
 </html>

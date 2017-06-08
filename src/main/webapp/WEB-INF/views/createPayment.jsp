@@ -34,7 +34,7 @@
             <h1 class="title"><fmt:message key="create.new.payment"/></h1>
             <hr/>
         </div>
-        <form class="form-inline" method="post">
+        <form class="form-inline text-center" method="post">
             <div class="form-group">
                 <label for="accountFrom">
                     <fmt:message key="account.from"/>

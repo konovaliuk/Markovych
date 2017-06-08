@@ -34,7 +34,7 @@
             <h1 class="title"><fmt:message key="account.replenish"/></h1>
             <hr/>
         </div>
-            <form class="form-inline" method="post">
+            <form class="form-inline text-center" method="post">
                 <div class="form-group">
                     <label for="account">
                         <fmt:message key="select.account"/>

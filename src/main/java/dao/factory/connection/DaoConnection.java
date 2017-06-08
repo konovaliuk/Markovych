@@ -2,7 +2,7 @@ package dao.factory.connection;
 
 /**
  * Class that describes abstract connection.
- * Provides flexible ways of conducting transactions.
+ * Provides flexible and safe ways of conducting transactions.
  *
  * @author Andrii Markovych
  */
@@ -31,7 +31,7 @@ public interface DaoConnection extends AutoCloseable{
     /**
      * @return database specific connection
      */
-    Object getSpecificConnection();
+    Object getNativeConnection();
 
     @Override
     void close();

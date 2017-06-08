@@ -13,9 +13,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-/**
- * Created by Zulu Warrior on 5/22/2017.
- */
 public class MySqlAccountDao implements AccountDao {
     private final static String SELECT_ALL =
             "SELECT accounts.account_number, accounts.account_holder, " +

@@ -12,9 +12,6 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-/**
- * Created by Zulu Warrior on 5/21/2017.
- */
 public class MySqlDaoFactory extends DaoFactory {
     private final static String NULLABLE_CONNECTION =
             "Null pointer connection!";
@@ -53,11 +50,12 @@ public class MySqlDaoFactory extends DaoFactory {
     }
 
     private Connection getSqlConnection(DaoConnection connection) {
-        return (Connection) connection.getSpecificConnection();
+        checkDaoConnection(connection);
+        return (Connection) connection.getNativeConnection();
     }
 
     private void checkDaoConnection(DaoConnection connection) {
-        if(connection == null || connection.getSpecificConnection() == null) {
+        if(connection == null || connection.getNativeConnection() == null) {
             throw new DaoException(NULLABLE_CONNECTION);
         }
         if(! (connection instanceof MySqlConnection)) {

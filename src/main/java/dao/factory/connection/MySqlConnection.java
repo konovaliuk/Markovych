@@ -4,11 +4,21 @@ import dao.exception.DaoException;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
-/**
- * Created by Zulu Warrior on 5/21/2017.
- */
+
 public class MySqlConnection implements DaoConnection {
+    private static final String ERROR_DURING_START =
+            "Failed to start transaction";
+    private static final String ERROR_DURING_COMMIT =
+            "Failed to commit transaction";
+    private static final String ERROR_DURING_ROLLBACK =
+            "Failed to rollback transaction";
+    private static final String ERROR_DURING_CLOSE =
+            "Failed to close transaction";
+
+    private static final Logger logger = Logger.getLogger(MySqlConnection.class);
+
     private final Connection connection;
     private boolean isTransactionActive;
 
@@ -22,6 +32,7 @@ public class MySqlConnection implements DaoConnection {
             connection.setAutoCommit(false);
             isTransactionActive = true;
         } catch (SQLException e) {
+            logger.error(ERROR_DURING_START, e);
             throw new DaoException(e);
         }
     }
@@ -32,6 +43,7 @@ public class MySqlConnection implements DaoConnection {
             connection.setAutoCommit(false);
             isTransactionActive = true;
         } catch (SQLException e) {
+            logger.error(ERROR_DURING_START, e);
             throw new DaoException(e);
         }
     }
@@ -43,6 +55,7 @@ public class MySqlConnection implements DaoConnection {
             connection.setAutoCommit(true);
             isTransactionActive = false;
         } catch (SQLException e) {
+            logger.error(ERROR_DURING_COMMIT, e);
             throw new DaoException(e);
         }
     }
@@ -54,13 +67,9 @@ public class MySqlConnection implements DaoConnection {
             connection.setAutoCommit(true);
             isTransactionActive = false;
         } catch (SQLException e) {
+            logger.error(ERROR_DURING_ROLLBACK, e);
             throw new DaoException(e);
         }
-    }
-
-    @Override
-    public Object getSpecificConnection() {
-        return connection;
     }
 
     @Override
@@ -75,7 +84,13 @@ public class MySqlConnection implements DaoConnection {
                 connection.close();
             }
         } catch (SQLException e) {
+            logger.error(ERROR_DURING_CLOSE, e);
             throw new DaoException(e);
         }
+    }
+
+    @Override
+    public Object getNativeConnection() {
+        return connection;
     }
 }

@@ -5,6 +5,7 @@ import controller.util.constants.Attributes;
 import controller.util.constants.PagesPaths;
 import entity.User;
 
+import org.apache.log4j.Logger;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,7 @@ import java.io.IOException;
  * Created by Zulu Warrior on 6/3/2017.
  */
 public class AuthorizationFilter implements Filter {
+    private final static Logger logger = Logger.getLogger(AuthorizationFilter.class);
     private final static String ACCESS_DENIED = "Access denied for page: ";
 
     private final static int USER_ROLE_ID = 1;
@@ -39,7 +41,7 @@ public class AuthorizationFilter implements Filter {
                     (HttpServletResponse) servletResponse,
                     PagesPaths.LOGIN_PATH
             );
-
+            logInfoAboutAccessDenied(request.getRequestURI());
             return;
         }
 
@@ -51,7 +53,7 @@ public class AuthorizationFilter implements Filter {
                     (HttpServletResponse) servletResponse,
                     PagesPaths.HOME_PATH
             );
-
+            logInfoAboutAccessDenied(request.getRequestURI());
             return;
         }
 
@@ -88,5 +90,9 @@ public class AuthorizationFilter implements Filter {
         return request
                 .getRequestURI()
                 .startsWith(PagesPaths.SITE_PREFIX + PagesPaths.ADMIN_PREFIX);
+    }
+
+    private void logInfoAboutAccessDenied(String uri) {
+        logger.info(ACCESS_DENIED + uri);
     }
 }

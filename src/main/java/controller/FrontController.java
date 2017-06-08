@@ -1,8 +1,8 @@
 package controller;
 
+import controller.ControllerHelper.Method;
 import controller.command.ICommand;
 import controller.i18n.SupportedLocale;
-import controller.ControllerHelper.Method;
 import controller.util.constants.PagesPaths;
 
 import javax.servlet.ServletException;
@@ -17,8 +17,15 @@ import java.io.IOException;
  */
 @WebServlet(name = "test", urlPatterns = "/site/*")
 
+/**
+ * Provide a centralized request handling mechanism to
+ * handle all types of requests coming to the application.
+ *
+ * @author Andrii Markovych
+ */
 public class FrontController extends HttpServlet {
     private final static String SUPPORTED_LOCALES = "supportedLocales";
+
 
     private ControllerHelper controllerHelper;
 
@@ -52,7 +59,7 @@ public class FrontController extends HttpServlet {
                 getPath(request), method);
 
         String path = command.execute(request, response);
-        if(!path.equals(ICommand.REDIRECTED)) {
+        if (!path.equals(ICommand.REDIRECTED)) {
             request.getRequestDispatcher(path).forward(request, response);
         }
     }

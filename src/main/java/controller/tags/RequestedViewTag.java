@@ -8,7 +8,10 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 
 /**
- * Created by Zulu Warrior on 5/31/2017.
+ * Business logic of my own custom tag.
+ * Sends to jsp URI of requested view.
+ *
+ * @author Andrii Markovych
  */
 public class RequestedViewTag extends SimpleTagSupport {
     @Override

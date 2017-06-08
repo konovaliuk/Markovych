@@ -54,9 +54,12 @@ public class MySqlPaymentDao implements PaymentDao {
                     "payments.account_to = ? ";
 
     private final static String WHERE_USER =
-            "WHERE payments.account_from OR payments.account_to IN " +
+            "WHERE payments.account_from IN " +
                     "(SELECT accounts.account_number FROM accounts " +
-                    "WHERE accounts.account_holder = ?);";
+                    "WHERE accounts.account_holder = ?) " +
+                    "OR payments.account_to IN " +
+                    "(SELECT accounts.account_number FROM accounts " +
+                    "WHERE accounts.account_holder = ?)" ;
 
     private final static String INSERT =
             "INSERT INTO payments(" +
@@ -162,6 +165,7 @@ public class MySqlPaymentDao implements PaymentDao {
 
         return defaultDao.findAll(
                 SELECT_ALL + WHERE_USER,
+                user.getId(),
                 user.getId()
         );
     }

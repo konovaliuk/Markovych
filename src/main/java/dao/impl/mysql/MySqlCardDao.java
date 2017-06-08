@@ -43,10 +43,10 @@ public class MySqlCardDao implements CardDao {
 
     private final static String INSERT =
             "INSERT INTO cards" +
-                    "(cards.card_number, cards.card_holder, " +
+                    "(cards.card_holder, " +
                     "cards.fk_account_number, cards.pin, " +
                     "cards.cvv, cards.expire_date, cards.type) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?) ";
+                    "VALUES (?, ?, ?, ?, ?, ?) ";
 
     private final static String UPDATE =
             "UPDATE cards SET " +
@@ -93,9 +93,8 @@ public class MySqlCardDao implements CardDao {
     public Card insert(Card obj) {
         Objects.requireNonNull(obj);
 
-        defaultDao.executeUpdate(
+        defaultDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
-                obj.getCardNumber(),
                 obj.getCardHolder().getId(),
                 obj.getAccount().getAccountNumber(),
                 obj.getPin(),

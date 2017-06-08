@@ -61,7 +61,7 @@ public class MySqlRoleDao implements RoleDao {
     public Role insert(Role obj) {
         Objects.requireNonNull(obj);
 
-        int id = defaultDao.executeInsertWithGeneratedPrimaryKey(
+        int id = (int)defaultDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
                 obj.getName()
         );

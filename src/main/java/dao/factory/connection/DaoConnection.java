@@ -1,18 +1,36 @@
 package dao.factory.connection;
 
 /**
- * Created by Zulu Warrior on 5/21/2017.
+ * Class that describes abstract connection.
+ * Provides flexible ways of conducting transactions.
+ *
+ * @author Andrii Markovych
  */
 public interface DaoConnection extends AutoCloseable{
 
+    /**
+     * Starts transaction with level {@code TRANSACTION_REPEATABLE_READ}
+     */
     void startTransaction();
 
+    /**
+     * Starts transaction with level {@code TRANSACTION_SERIALIZABLE}
+     */
     void startSerializableTransaction();
 
+    /**
+     * Commits transaction.
+     */
     void commit();
 
+    /**
+     * Rollback transaction
+     */
     void rollback();
 
+    /**
+     * @return database specific connection
+     */
     Object getSpecificConnection();
 
     @Override

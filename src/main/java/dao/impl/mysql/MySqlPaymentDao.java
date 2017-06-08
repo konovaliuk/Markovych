@@ -110,7 +110,7 @@ public class MySqlPaymentDao implements PaymentDao {
     public Payment insert(Payment obj) {
         Objects.requireNonNull(obj);
 
-        int id = defaultDao.
+        int id = (int)defaultDao.
                 executeInsertWithGeneratedPrimaryKey(
                 INSERT,
                         obj.getAmount(),

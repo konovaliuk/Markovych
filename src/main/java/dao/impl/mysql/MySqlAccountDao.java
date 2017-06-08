@@ -39,9 +39,9 @@ public class MySqlAccountDao implements AccountDao {
 
     private final static String INSERT =
             "INSERT INTO accounts" +
-                    "(account_number, account_holder, " +
+                    "(account_holder, " +
                     "balance, status) " +
-                    "VALUES(?, ?, ?, ?) ";
+                    "VALUES(?, ?, ?) ";
 
     private final static String UPDATE =
             "UPDATE accounts SET " +
@@ -99,13 +99,14 @@ public class MySqlAccountDao implements AccountDao {
     public Account insert(Account account) {
         Objects.requireNonNull(account);
 
-        defaultDao.executeUpdate(
+        long accountNumber = defaultDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
-                account.getAccountNumber(),
                 account.getAccountHolder().getId(),
                 account.getBalance(),
                 account.getStatus().toString()
         );
+
+        account.setAccountNumber(accountNumber);
 
         return account;
     }

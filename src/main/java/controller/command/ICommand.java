@@ -6,12 +6,26 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Zulu Warrior on 5/28/2017.
+ * Specialize interface for command in front controller pattern.
+ *
+ * @see controller.FrontController
+ * @author Andrii Markovych
  */
 public interface ICommand {
+    /**
+     * Return from execute in case when redirecting action happens
+     */
     String REDIRECTED ="REDIRECTED";
 
-
+    /**
+     * Process request of user.
+     *
+     * @param request
+     * @param response
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
     String execute(HttpServletRequest request,
                    HttpServletResponse response)
             throws ServletException, IOException;

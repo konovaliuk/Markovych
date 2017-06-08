@@ -4,10 +4,8 @@ import controller.command.ICommand;
 import controller.util.constants.Attributes;
 import controller.util.constants.Views;
 import entity.Account;
-import entity.Payment;
 import entity.User;
 import service.AccountService;
-import service.PaymentService;
 import service.ServiceFactory;
 
 import javax.servlet.ServletException;
@@ -18,9 +16,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by Zulu Warrior on 6/5/2017.
+ * Created by Zulu Warrior on 6/7/2017.
  */
-public class GetCreatePaymentCommand implements ICommand{
+public class GetReplenishCommand implements ICommand {
     private final AccountService accountService = ServiceFactory.getAccountService();
 
     @Override
@@ -31,7 +29,7 @@ public class GetCreatePaymentCommand implements ICommand{
 
         request.setAttribute(Attributes.ACCOUNTS, accounts);
 
-        return Views.NEW_PAYMENT_VIEW;
+        return Views.REPLENISH_VIEW;
     }
 
     private User getUserFromSession(HttpSession session) {

@@ -21,7 +21,7 @@ public abstract class DaoFactory {
      * Gets factory class name from certain properties file.
      * Reflection used for more flexibility.
      *
-     * @return impl specific factory
+     * @return specific implemented factory
      */
     public static DaoFactory getInstance() {
         if (instance == null){

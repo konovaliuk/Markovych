@@ -13,4 +13,5 @@ public interface Views {
     String CARDS_VIEW = FOLDER + "cards.jsp";
     String PAYMENTS_VIEW = FOLDER + "payments.jsp";
     String NEW_PAYMENT_VIEW = FOLDER + "createPayment.jsp";
+    String REPLENISH_VIEW = FOLDER + "replenish.jsp";
 }

@@ -6,16 +6,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Zulu Warrior on 5/22/2017.
+ * Common interface for all dto converters.
+ *
+ * @param <T> type of domain object
+ *
+ * @author Andrii Markovych
  */
 public interface DtoConverter <T> {
-    public final String EMPTY_STRING = "";
+    String EMPTY_STRING = "";
 
+    /**
+     * Read data from a result set and convert it to list of objects.
+     *
+     * @param resultSet result set from the database
+     * @return list of converted objects
+     */
     default List<T> convertToObjectList(ResultSet resultSet)
             throws SQLException {
         return convertToObjectList(resultSet, EMPTY_STRING);
     }
 
+    /**
+     * Read data from a result set and convert it to list of objects.
+     *
+     * @param resultSet result set from the database
+     * @param tablePrefix prefix of the table in result set
+     * @return list of converted objects
+     * @throws SQLException
+     */
     default List<T> convertToObjectList(ResultSet resultSet, String tablePrefix)
             throws SQLException {
         List<T> convertedObjects = new ArrayList<T>();
@@ -27,10 +45,25 @@ public interface DtoConverter <T> {
         return convertedObjects;
     }
 
+    /**
+     * Read data from a result set and convert it to certain object.
+     *
+     * @param resultSet result set from the database
+     * @return converted object
+     * @throws SQLException
+     */
     default T convertToObject(ResultSet resultSet) throws SQLException {
         return convertToObject(resultSet, EMPTY_STRING);
     }
 
+    /**
+     * Read data from a result set and convert it to certain object.
+     *
+     * @param resultSet result set from the database
+     * @param tablePrefix prefix of the table in result set
+     * @return converted object
+     * @throws SQLException
+     */
     T convertToObject(ResultSet resultSet, String tablePrefix) throws SQLException;
 
 }

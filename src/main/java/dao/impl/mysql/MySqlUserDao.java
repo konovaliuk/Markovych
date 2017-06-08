@@ -79,7 +79,7 @@ public class MySqlUserDao implements UserDao {
     public User insert(User obj) {
         Objects.requireNonNull(obj);
 
-        int id = defaultDao.executeInsertWithGeneratedPrimaryKey(
+        int id = (int)defaultDao.executeInsertWithGeneratedPrimaryKey(
                 INSERT,
                 obj.getRole().getId(),
                 obj.getFirstName(),

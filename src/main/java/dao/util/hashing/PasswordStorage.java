@@ -10,7 +10,7 @@ public class PasswordStorage {
 
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
-        String passwordToHash = "password";
+        String passwordToHash = "admin123";
 
         String securePassword = getSecurePassword(passwordToHash);
         System.out.println(securePassword);

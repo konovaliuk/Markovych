@@ -6,6 +6,8 @@ import java.math.BigDecimal;
  * Created by Zulu Warrior on 5/21/2017.
  */
 public class Account {
+    public final static long DEFAULT_NUMBER = 0L;
+    public final static String DEFAULT_BALANCE = "0.00";
 
     public enum Status {
         ACTIVE, PENDING, BLOCKED

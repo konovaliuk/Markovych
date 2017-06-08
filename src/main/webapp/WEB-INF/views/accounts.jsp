@@ -43,8 +43,14 @@
 
 <div class="container">
     <div class="row col-md-10 col-md-offset-1 custyle">
+
         <div class="panel-title text-center">
-            <h1 class="title"><fmt:message key="your.accounts"/></h1>
+            <c:if test="${not empty sessionScope.user and not sessionScope.user.isAdmin()}">
+                <h1 class="title"><fmt:message key="your.accounts"/></h1>
+            </c:if>
+            <c:if test="${not empty sessionScope.user and sessionScope.user.isAdmin()}">
+                <h1 class="title"><fmt:message key="accounts"/></h1>
+            </c:if>
             <hr/>
         </div>
         <c:choose>
@@ -65,13 +71,50 @@
                             <td><c:out value="${account.getBalance()}"/></td>
                             <td><c:out value="${account.getStatus()}"/></td>
                             <td>
-                                <c:if test="${account.isActive()}">
-                                <form action="${pageContext.request.contextPath}/site/user/accounts/block" method="POST">
-                                    <input type="hidden" name="account" value="${account.getAccountNumber()}">
-                                    <button type="submit" class='btn btn-info btn-xs'>
-                                        <fmt:message key="account.block"/>
-                                    </button>
-                                </form>
+                                <c:if test="${not sessionScope.user.isAdmin()}">
+                                    <c:if test="${account.isActive()}">
+                                        <form action="${pageContext.request.contextPath}/site/user/accounts/block"
+                                              method="POST">
+                                            <input type="hidden" name="account" value="${account.getAccountNumber()}">
+                                            <button type="submit" class='btn btn-info btn-xs'>
+                                                <fmt:message key="account.block"/>
+                                            </button>
+                                        </form>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${sessionScope.user.isAdmin()}">
+                                    <c:choose>
+                                        <c:when test="${account.isBlocked()}">
+                                            <form action="${pageContext.request.contextPath}/site/admin/accounts/unblock"
+                                                  method="POST">
+                                                <input type="hidden" name="account"
+                                                       value="${account.getAccountNumber()}">
+                                                <button type="submit" class='btn btn-info btn-xs'>
+                                                    <fmt:message key="account.unblock"/>
+                                                </button>
+                                            </form>
+                                        </c:when>
+                                        <c:when test="${account.isPending()}">
+                                            <form action="${pageContext.request.contextPath}/site/admin/accounts/confirm"
+                                                  method="POST">
+                                                <input type="hidden" name="account"
+                                                       value="${account.getAccountNumber()}">
+                                                <button type="submit" class='btn btn-info btn-xs'>
+                                                    <fmt:message key="account.confirm"/>
+                                                </button>
+                                            </form>
+                                        </c:when>
+                                        <c:when test="${account.isActive()}">
+                                            <form action="${pageContext.request.contextPath}/site/admin/accounts/block"
+                                                  method="POST">
+                                                <input type="hidden" name="account"
+                                                       value="${account.getAccountNumber()}">
+                                                <button type="submit" class='btn btn-info btn-xs'>
+                                                    <fmt:message key="account.block"/>
+                                                </button>
+                                            </form>
+                                        </c:when>
+                                    </c:choose>
                                 </c:if>
                             </td>
                         </tr>

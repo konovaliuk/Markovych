@@ -36,7 +36,12 @@
 <div class="container">
     <div class="row col-md-10 col-md-offset-1 custyle">
         <div class="panel-title text-center">
-            <h1 class="title"><fmt:message key="your.cards"/></h1>
+            <c:if test="${not sessionScope.user.isAdmin()}">
+                <h1 class="title"><fmt:message key="your.cards"/></h1>
+            </c:if>
+            <c:if test="${sessionScope.user.isAdmin()}">
+                <h1 class="title"><fmt:message key="cards"/></h1>
+            </c:if>
             <hr/>
         </div>
         <c:choose>

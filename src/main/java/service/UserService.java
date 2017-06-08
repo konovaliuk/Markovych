@@ -11,7 +11,11 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Created by Zulu Warrior on 5/26/2017.
+ * Intermediate layer between command layer and dao layer.
+ * Implements operations of finding, creating, deleting entities.
+ * Uses dao layer.
+ *
+ * @author Andrii Markovych
  */
 public class UserService {
     private final DaoFactory daoFactory= DaoFactory.getInstance();

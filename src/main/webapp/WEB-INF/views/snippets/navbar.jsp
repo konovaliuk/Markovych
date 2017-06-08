@@ -3,7 +3,6 @@
 <%@ taglib prefix="myLib" uri="/WEB-INF/customTags/requestedViewTag" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-
 <fmt:setLocale value='${sessionScope.locale}'/>
 <fmt:setBundle basename="i18n.lang"/>
 
@@ -14,6 +13,7 @@
 <c:set var="paymentsView" scope="page" value="/WEB-INF/views/payments.jsp"/>
 <c:set var="loginView" scope="page" value="/WEB-INF/views/login.jsp"/>
 <c:set var="signUpView" scope="page" value="/WEB-INF/views/signup.jsp"/>
+<c:set var="replenishView" scope="page" value="/WEB-INF/views/replenish.jsp"/>
 
 
 <c:set var="currView" scope="page">
@@ -48,6 +48,19 @@
                 </c:choose>
                 <a href="${pageContext.request.contextPath}/site/user/accounts">
                     <fmt:message key="accounts"/>
+                </a>
+                </li>
+
+                <c:choose>
+                    <c:when test="${replenishView.equals(currView)}">
+                        <li class="active">
+                    </c:when>
+                    <c:otherwise>
+                        <li>
+                    </c:otherwise>
+                </c:choose>
+                <a href="${pageContext.request.contextPath}/site/user/replenish">
+                    <fmt:message key="account.replenish"/>
                 </a>
                 </li>
 

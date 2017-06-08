@@ -13,7 +13,11 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Created by Zulu Warrior on 5/27/2017.
+ * Intermediate layer between command layer and dao layer.
+ * Implements operations of finding, creating, deleting entities.
+ * Uses dao layer.
+ *
+ * @author Andrii Markovych
  */
 public class PaymentService {
     private final DaoFactory daoFactory= DaoFactory.getInstance();
@@ -34,6 +38,14 @@ public class PaymentService {
             return paymentDao.findOne(id);
         }
     }
+
+    public List<Payment> findAll() {
+        try(DaoConnection connection = daoFactory.getConnection()) {
+            PaymentDao paymentDao = daoFactory.getPaymentDao(connection);
+            return paymentDao.findAll();
+        }
+    }
+
 
     public List<Payment> findAllByUser(User user) {
         try(DaoConnection connection = daoFactory.getConnection()) {

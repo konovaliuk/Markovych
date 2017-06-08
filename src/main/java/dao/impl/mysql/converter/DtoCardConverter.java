@@ -3,7 +3,6 @@ package dao.impl.mysql.converter;
 import entity.Account;
 import entity.Card;
 import entity.User;
-import entity.enums.CardType;
 import dao.util.time.TimeConverter;
 
 import java.sql.ResultSet;
@@ -50,7 +49,7 @@ public class DtoCardConverter implements DtoConverter<Card> {
                 setExpireDate(TimeConverter.toDate(
                         resultSet.getTimestamp(
                                 tablePrefix + "expire_date"))).
-                setType(CardType.valueOf(
+                setType(Card.CardType.valueOf(
                         resultSet.getString(
                                 tablePrefix + "type"))).
                 build();

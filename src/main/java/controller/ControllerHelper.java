@@ -1,8 +1,10 @@
 package controller;
 
+import controller.command.BlockAccountCommand;
 import controller.command.DefaultCommand;
 import controller.command.HomeCommand;
 import controller.command.ICommand;
+import controller.command.admin.*;
 import controller.command.authorization.*;
 import controller.command.user.*;
 import controller.util.constants.PagesPaths;
@@ -44,7 +46,25 @@ public class ControllerHelper {
         commands.put(buildKey(PagesPaths.USER_BLOCK_ACCOUNT, Method.POST),
                 new BlockAccountCommand());
         commands.put(buildKey(PagesPaths.USER_CREATE_PAYMENT, Method.GET),
-                new GetCreatePaymentCommand());
+                new GetNewPaymentCommand());
+        commands.put(buildKey(PagesPaths.USER_CREATE_PAYMENT, Method.POST),
+                new PostNewPaymentCommand());
+        commands.put(buildKey(PagesPaths.USER_REPLENISH, Method.GET),
+                new GetReplenishCommand());
+        commands.put(buildKey(PagesPaths.USER_REPLENISH, Method.POST),
+                new PostReplenishCommand());
+        commands.put(buildKey(PagesPaths.ADMIN_ACCOUNTS_PATH, Method.GET),
+                new GetAllAccountsCommand());
+        commands.put(buildKey(PagesPaths.ADMIN_CARDS_PATH, Method.GET),
+                new GetAllCardsCommand());
+        commands.put(buildKey(PagesPaths.ADMIN_PAYMENTS_PATH, Method.GET),
+                new GetAllPaymentsCommand());
+        commands.put(buildKey(PagesPaths.ADMIN_UNBLOCK_PATH, Method.POST),
+                new UnblockAccountCommand());
+        commands.put(buildKey(PagesPaths.ADMIN_CONFIRM_PATH, Method.POST),
+                new ConfirmAccountCommand());
+        commands.put(buildKey(PagesPaths.ADMIN_BLOCK_ACCOUNT, Method.POST),
+                new BlockAccountCommand());
     }
 
     public ICommand getCommand(String path, Method method) {

@@ -6,7 +6,11 @@ import entity.Account;
 import javax.jws.soap.SOAPBinding;
 
 /**
- * Created by Zulu Warrior on 5/27/2017.
+ * Intermediate layer between command layer and dao layer.
+ * Implements operations of finding, creating, deleting entities.
+ * Uses dao layer.
+ *
+ * @author Andrii Markovych
  */
 public class ServiceFactory {
     private static ServiceFactory instance;

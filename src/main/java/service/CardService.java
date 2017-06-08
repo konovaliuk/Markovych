@@ -11,7 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Created by Zulu Warrior on 5/27/2017.
+ * Intermediate layer between command layer and dao layer.
+ * Implements operations of finding, creating, deleting entities.
+ * Uses dao layer.
+ *
+ * @author Andrii Markovych
  */
 public class CardService {
     private final DaoFactory daoFactory= DaoFactory.getInstance();
@@ -23,6 +27,13 @@ public class CardService {
 
         public static CardService getInstance() {
             return INSTANCE;
+        }
+    }
+
+    public Card createCard(Card card) {
+        try(DaoConnection connection = daoFactory.getConnection()) {
+            CardDao cardDao = daoFactory.getCardDao(connection);
+            return cardDao.insert(card);
         }
     }
 

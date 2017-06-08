@@ -1,13 +1,17 @@
 package entity;
 
-import entity.enums.CardType;
-
 import java.util.Date;
 
 /**
  * Created by Zulu Warrior on 5/21/2017.
  */
 public class Card {
+
+    public enum CardType {
+    VISA, MASTERCARD
+}
+    public final static long DEFAULT_NUMBER = 0L;
+
     private long cardNumber;
     private User cardHolder;
     private Account account;
@@ -139,4 +143,9 @@ public class Card {
     public int hashCode() {
         return (int) (cardNumber ^ (cardNumber >>> 32));
     }
+
+    /**
+     * Created by Zulu Warrior on 5/21/2017.
+     */
+
 }

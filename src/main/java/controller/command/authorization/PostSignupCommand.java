@@ -9,7 +9,12 @@ import controller.util.validator.EmailValidator;
 import controller.util.validator.NameValidator;
 import controller.util.validator.PasswordValidator;
 import controller.util.validator.PhoneValidator;
+import dao.util.card.CardPassGenerator;
+import entity.Account;
+import entity.Card;
 import entity.User;
+import service.AccountService;
+import service.CardService;
 import service.ServiceFactory;
 import service.UserService;
 
@@ -18,7 +23,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,6 +46,8 @@ public class PostSignupCommand implements ICommand {
             "Created profile for user with email - ";
 
     private final UserService userService = ServiceFactory.getUserService();
+    private final AccountService accountService = ServiceFactory.getAccountService();
+    private final CardService cardService = ServiceFactory.getCardService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
@@ -54,6 +63,9 @@ public class PostSignupCommand implements ICommand {
 
         if(errors.isEmpty()) {
             User createdUser = userService.createUser(userDto);
+            Account userAccount = createNewAccount(createdUser);
+            createNewCard(userAccount, createdUser);
+
             addUserToSession(request.getSession(), createdUser);
 
             Util.redirectTo(request, response, PagesPaths.HOME_PATH);
@@ -76,6 +88,33 @@ public class PostSignupCommand implements ICommand {
                 .setLastName(request.getParameter(LASTNAME_PARAM))
                 .setPhoneNumber(request.getParameter(PHONE_PARAM))
                 .build();
+    }
+
+    private Account createNewAccount(User user) {
+        Account tempAccount = new Account(Account.DEFAULT_NUMBER,
+                user,
+                new BigDecimal(Account.DEFAULT_BALANCE),
+                Account.Status.PENDING);
+
+        Account userAccount = accountService.createAccount(tempAccount);
+
+        return userAccount;
+    }
+
+    private Card createNewCard(Account account, User user) {
+        Card tempCard = Card.newBuilder()
+                .setCardNumber(Card.DEFAULT_NUMBER)
+                .setAccount(account)
+                .setCardHolder(user)
+                .setCvv(CardPassGenerator.getRandomCvv())
+                .setPin(CardPassGenerator.getRandomPin())
+                .setExpireDate(new Date())
+                .setType(Card.CardType.VISA)
+                .build();
+
+        Card createdCard = cardService.createCard(tempCard);
+
+        return createdCard;
     }
 
     private List<String> validateData(User user) {

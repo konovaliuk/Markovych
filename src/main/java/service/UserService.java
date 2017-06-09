@@ -22,12 +22,12 @@ public class UserService {
 
     private UserService() {}
 
-    public static class Singleton {
+    private static class Singleton {
         private final static UserService INSTANCE = new UserService();
+    }
 
-        public static UserService getInstance() {
-            return INSTANCE;
-        }
+    public static UserService getInstance() {
+        return Singleton.INSTANCE;
     }
 
     public Optional<User> findById(Integer id) {

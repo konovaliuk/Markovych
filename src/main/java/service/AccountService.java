@@ -21,12 +21,12 @@ public class AccountService {
 
     private AccountService() {}
 
-    public static class Singleton {
+    private static class Singleton {
         private final static AccountService INSTANCE = new AccountService();
+    }
 
-        public static AccountService getInstance() {
-            return INSTANCE;
-        }
+    public static AccountService getInstance() {
+        return Singleton.INSTANCE;
     }
 
     public List<Account> findAllAccounts() {

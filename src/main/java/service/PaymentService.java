@@ -24,12 +24,12 @@ public class PaymentService {
 
     private PaymentService() {}
 
-    public static class Singleton {
+    private static class Singleton {
         private final static PaymentService INSTANCE = new PaymentService();
+    }
 
-        public static PaymentService getInstance() {
-            return INSTANCE;
-        }
+    public static PaymentService getInstance() {
+        return Singleton.INSTANCE;
     }
 
     public Optional<Payment> findById(Integer id) {

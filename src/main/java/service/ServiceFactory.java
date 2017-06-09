@@ -27,19 +27,19 @@ public class ServiceFactory {
 
 
     public static UserService getUserService() {
-        return UserService.Singleton.getInstance();
+        return UserService.getInstance();
     }
 
     public static AccountService getAccountService() {
-        return AccountService.Singleton.getInstance();
+        return AccountService.getInstance();
     }
 
     public static CardService getCardService() {
-        return CardService.Singleton.getInstance();
+        return CardService.getInstance();
     }
 
     public static PaymentService getPaymentService() {
-        return PaymentService.Singleton.getInstance();
+        return PaymentService.getInstance();
     }
 
 

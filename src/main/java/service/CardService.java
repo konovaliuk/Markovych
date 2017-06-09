@@ -22,12 +22,12 @@ public class CardService {
 
     private CardService() {}
 
-    public static class Singleton {
+    private static class Singleton {
         private final static CardService INSTANCE = new CardService();
+    }
 
-        public static CardService getInstance() {
-            return INSTANCE;
-        }
+    public static CardService getInstance() {
+        return Singleton.INSTANCE;
     }
 
     public Card createCard(Card card) {

@@ -34,8 +34,7 @@ public class BlockAccountCommand implements ICommand {
         Optional<Account> account = getAccountFromRequest(request);
 
         if(account.isPresent()) {
-            blockAccount(account.get());
-            addSuccessMessageToRequest(request);
+            blockAccount(request, account.get());
 
             addAccountsListToRequest(request);
             
@@ -51,8 +50,20 @@ public class BlockAccountCommand implements ICommand {
         return accountService.findAccountByNumber(accountNumber);
     }
 
-    private void blockAccount(Account account) {
+    private void blockAccount(HttpServletRequest request, Account account) {
+        Account checkAccount = accountService.findAccountByNumber(
+                account.getAccountNumber()
+        ).get();
+
+            if(checkAccount.isBlocked()) {
+                List<String> errors = new ArrayList<>();
+                errors.add("account.is.already.blocked");
+                request.setAttribute(Attributes.ERRORS, errors);
+                return;
+            }
+
         accountService.updateAccountStatus(account, Account.Status.BLOCKED);
+        addSuccessMessageToRequest(request);
     }
 
     private void addSuccessMessageToRequest(HttpServletRequest request) {

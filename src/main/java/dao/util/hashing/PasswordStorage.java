@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by Zulu Warrior on 5/26/2017.
  */
 public class PasswordStorage {
-    
+
     public static String getSecurePassword(String passwordToHash)
     {
         try{

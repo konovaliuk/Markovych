@@ -18,4 +18,3 @@ public class HashingTest {
         Assert.assertTrue(PasswordStorage.checkSecurePassword(password, passwordHash));
     }
 }
-

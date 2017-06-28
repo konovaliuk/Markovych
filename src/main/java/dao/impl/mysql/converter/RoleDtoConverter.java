@@ -8,7 +8,7 @@ import java.sql.SQLException;
 /**
  * Created by Zulu Warrior on 5/22/2017.
  */
-public class DtoRoleConverter implements DtoConverter<Role> {
+public class RoleDtoConverter implements DtoConverter<Role> {
     private final static String ID_FIELD = "role_id";
     private final static String NAME_FIELD = "role_name";
 

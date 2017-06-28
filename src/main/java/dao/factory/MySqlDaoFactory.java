@@ -30,23 +30,23 @@ public class MySqlDaoFactory extends DaoFactory {
     }
 
     public UserDao getUserDao(DaoConnection connection) {
-        return new MySqlUserDao(getSqlConnection(connection));
+        return new UserMySqlDao(getSqlConnection(connection));
     }
 
     public AccountDao getAccountDao(DaoConnection connection) {
-        return new MySqlAccountDao(getSqlConnection(connection));
+        return new AccountMySqlDao(getSqlConnection(connection));
     }
 
     public CardDao getCardDao(DaoConnection connection) {
-        return new MySqlCardDao(getSqlConnection(connection));
+        return new CardMySqlDao(getSqlConnection(connection));
     }
 
     public PaymentDao getPaymentDao(DaoConnection connection) {
-        return new MySqlPaymentDao(getSqlConnection(connection));
+        return new PaymentMySqlDao(getSqlConnection(connection));
     }
 
     public RoleDao getRoleDao(DaoConnection connection) {
-        return new MySqlRoleDao(getSqlConnection(connection));
+        return new RoleMySqlDao(getSqlConnection(connection));
     }
 
     private Connection getSqlConnection(DaoConnection connection) {

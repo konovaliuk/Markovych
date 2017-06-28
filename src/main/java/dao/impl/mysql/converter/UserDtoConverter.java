@@ -9,7 +9,7 @@ import java.sql.SQLException;
 /**
  * Created by Zulu Warrior on 5/22/2017.
  */
-public class DtoUserConverter implements DtoConverter<User>{
+public class UserDtoConverter implements DtoConverter<User>{
     private final static String ID_FIELD = "user_id";
     private final static String FIRST_NAME_FIELD = "first_name";
     private final static String LAST_NAME_FIELD = "last_name";
@@ -19,11 +19,11 @@ public class DtoUserConverter implements DtoConverter<User>{
 
     private final DtoConverter<Role> roleConverter;
 
-    public DtoUserConverter() {
-    this(new DtoRoleConverter());
+    public UserDtoConverter() {
+    this(new RoleDtoConverter());
     }
 
-    public DtoUserConverter(DtoConverter<Role> roleConverter) {
+    public UserDtoConverter(DtoConverter<Role> roleConverter) {
         this.roleConverter = roleConverter;
     }
 

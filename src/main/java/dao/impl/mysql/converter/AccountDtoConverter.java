@@ -9,17 +9,17 @@ import java.sql.SQLException;
 /**
  * Created by Zulu Warrior on 5/22/2017.
  */
-public class DtoAccountConverter implements DtoConverter<Account>{
+public class AccountDtoConverter implements DtoConverter<Account>{
     private final static String ACCOUNT_NUMBER_FIELD = "account_number";
     private final static String BALANCE_FIELD = "balance";
     private final static String STATUS_FIELD = "status";
     private final DtoConverter<User> userConverter;
 
-    public DtoAccountConverter() {
-        this(new DtoUserConverter());
+    public AccountDtoConverter() {
+        this(new UserDtoConverter());
     }
 
-    public DtoAccountConverter(DtoConverter<User> userConverter) {
+    public AccountDtoConverter(DtoConverter<User> userConverter) {
         this.userConverter = userConverter;
     }
 

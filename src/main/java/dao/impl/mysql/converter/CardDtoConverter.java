@@ -11,17 +11,17 @@ import java.sql.SQLException;
 /**
  * Created by Zulu Warrior on 5/22/2017.
  */
-public class DtoCardConverter implements DtoConverter<Card> {
+public class CardDtoConverter implements DtoConverter<Card> {
 
     private final DtoConverter<Account> accountConverter;
     private final DtoConverter<User> userConverter;
 
-    public DtoCardConverter() {
-        this(new DtoAccountConverter(),
-                new DtoUserConverter());
+    public CardDtoConverter() {
+        this(new AccountDtoConverter(),
+                new UserDtoConverter());
     }
 
-    public DtoCardConverter(DtoConverter<Account> accountConverter,
+    public CardDtoConverter(DtoConverter<Account> accountConverter,
                             DtoConverter<User> userConverter) {
         this.accountConverter = accountConverter;
         this.userConverter = userConverter;

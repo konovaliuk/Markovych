@@ -1,7 +1,7 @@
 package dao.impl.mysql;
 
 import dao.abstraction.CardDao;
-import dao.impl.mysql.converter.DtoCardConverter;
+import dao.impl.mysql.converter.CardDtoConverter;
 import dao.impl.mysql.converter.DtoConverter;
 import entity.Account;
 import entity.Card;
@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * Created by Zulu Warrior on 5/24/2017.
  */
-public class MySqlCardDao implements CardDao {
+public class CardMySqlDao implements CardDao {
     private final static String SELECT_ALL =
             "SELECT cards.card_number, cards.card_holder, cards.fk_account_number, " +
                     "cards.pin, cards.cvv, cards.expire_date, cards.type, " +
@@ -60,16 +60,16 @@ public class MySqlCardDao implements CardDao {
     private final DefaultDaoImpl<Card> defaultDao;
 
 
-    public MySqlCardDao(Connection connection) {
-        this(connection, new DtoCardConverter());
+    public CardMySqlDao(Connection connection) {
+        this(connection, new CardDtoConverter());
     }
 
-    public MySqlCardDao(Connection connection,
-                           DtoConverter<Card> converter) {
+    public CardMySqlDao(Connection connection,
+                        DtoConverter<Card> converter) {
         this.defaultDao = new DefaultDaoImpl<>(connection, converter);
     }
 
-    public MySqlCardDao(DefaultDaoImpl<Card> defaultDao) {
+    public CardMySqlDao(DefaultDaoImpl<Card> defaultDao) {
         this.defaultDao = defaultDao;
     }
 

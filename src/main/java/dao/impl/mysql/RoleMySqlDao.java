@@ -1,9 +1,8 @@
 package dao.impl.mysql;
 
 import dao.abstraction.RoleDao;
-import dao.exception.DaoException;
 import dao.impl.mysql.converter.DtoConverter;
-import dao.impl.mysql.converter.DtoRoleConverter;
+import dao.impl.mysql.converter.RoleDtoConverter;
 import entity.Role;
 
 import java.sql.*;
@@ -14,7 +13,7 @@ import java.util.Optional;
 /**
  * Created by Zulu Warrior on 5/22/2017.
  */
-public class MySqlRoleDao implements RoleDao {
+public class RoleMySqlDao implements RoleDao {
     private final static String SELECT_ALL =
             "SELECT * FROM roles ";
 
@@ -34,16 +33,16 @@ public class MySqlRoleDao implements RoleDao {
 
     private final DefaultDaoImpl<Role> defaultDao;
 
-    public MySqlRoleDao(Connection connection) {
-        this(connection, new DtoRoleConverter());
+    public RoleMySqlDao(Connection connection) {
+        this(connection, new RoleDtoConverter());
     }
 
-    public MySqlRoleDao(Connection connection,
-                         DtoConverter<Role> converter) {
+    public RoleMySqlDao(Connection connection,
+                        DtoConverter<Role> converter) {
         this.defaultDao = new DefaultDaoImpl<>(connection, converter);
     }
 
-    public MySqlRoleDao(DefaultDaoImpl<Role> defaultDao) {
+    public RoleMySqlDao(DefaultDaoImpl<Role> defaultDao) {
         this.defaultDao = defaultDao;
     }
 

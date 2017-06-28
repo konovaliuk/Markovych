@@ -2,7 +2,7 @@ package dao.impl.mysql;
 
 import dao.abstraction.PaymentDao;
 import dao.impl.mysql.converter.DtoConverter;
-import dao.impl.mysql.converter.DtoPaymentConverter;
+import dao.impl.mysql.converter.PaymentDtoConverter;
 import entity.Account;
 import entity.Payment;
 import entity.User;
@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * Created by Zulu Warrior on 5/24/2017.
  */
-public class MySqlPaymentDao implements PaymentDao {
+public class PaymentMySqlDao implements PaymentDao {
     private final static String SELECT_ALL =
             "SELECT payments.payment_id, payments.amount, payments.account_from, " +
                     "payments.account_to, payments.date, " +
@@ -79,16 +79,16 @@ public class MySqlPaymentDao implements PaymentDao {
     private final DefaultDaoImpl<Payment> defaultDao;
 
 
-    public MySqlPaymentDao(Connection connection) {
-        this(connection, new DtoPaymentConverter());
+    public PaymentMySqlDao(Connection connection) {
+        this(connection, new PaymentDtoConverter());
     }
 
-    public MySqlPaymentDao(Connection connection,
-                        DtoConverter<Payment> converter) {
+    public PaymentMySqlDao(Connection connection,
+                           DtoConverter<Payment> converter) {
         this.defaultDao = new DefaultDaoImpl<>(connection, converter);
     }
 
-    public MySqlPaymentDao(DefaultDaoImpl<Payment> defaultDao) {
+    public PaymentMySqlDao(DefaultDaoImpl<Payment> defaultDao) {
         this.defaultDao = defaultDao;
     }
 

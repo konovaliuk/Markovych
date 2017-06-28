@@ -2,7 +2,7 @@ package dao.impl.mysql;
 
 import dao.abstraction.UserDao;
 import dao.impl.mysql.converter.DtoConverter;
-import dao.impl.mysql.converter.DtoUserConverter;
+import dao.impl.mysql.converter.UserDtoConverter;
 import entity.User;
 
 import java.sql.Connection;
@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * Created by Zulu Warrior on 5/21/2017.
  */
-public class MySqlUserDao implements UserDao {
+public class UserMySqlDao implements UserDao {
     private final static String SELECT_ALL =
             "SELECT users.user_id, users.user_type, " +
                     "users.first_name, users.last_name, " +
@@ -47,16 +47,16 @@ public class MySqlUserDao implements UserDao {
 
     private final DefaultDaoImpl<User> defaultDao;
 
-    public MySqlUserDao(Connection connection) {
-        this(connection, new DtoUserConverter());
+    public UserMySqlDao(Connection connection) {
+        this(connection, new UserDtoConverter());
     }
 
-    public MySqlUserDao(Connection connection,
+    public UserMySqlDao(Connection connection,
                         DtoConverter<User> converter) {
         this.defaultDao = new DefaultDaoImpl<>(connection, converter);
     }
 
-    public MySqlUserDao(DefaultDaoImpl<User> defaultDao) {
+    public UserMySqlDao(DefaultDaoImpl<User> defaultDao) {
         this.defaultDao = defaultDao;
     }
 

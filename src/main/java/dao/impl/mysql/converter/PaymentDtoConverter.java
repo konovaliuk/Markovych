@@ -10,7 +10,7 @@ import java.sql.SQLException;
 /**
  * Created by Zulu Warrior on 5/22/2017.
  */
-public class DtoPaymentConverter implements DtoConverter<Payment> {
+public class PaymentDtoConverter implements DtoConverter<Payment> {
     private final static String ID_FIELD = "payment_id";
 
     private final static String AMOUNT_FIELD = "amount";
@@ -32,11 +32,11 @@ public class DtoPaymentConverter implements DtoConverter<Payment> {
 
     private final DtoConverter<Account> accountConverter;
 
-    public DtoPaymentConverter() {
-        this(new DtoAccountConverter());
+    public PaymentDtoConverter() {
+        this(new AccountDtoConverter());
     }
 
-    public DtoPaymentConverter(DtoConverter<Account> accountConverter) {
+    public PaymentDtoConverter(DtoConverter<Account> accountConverter) {
         this.accountConverter = accountConverter;
     }
 

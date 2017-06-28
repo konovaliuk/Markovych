@@ -1,7 +1,7 @@
 package dao.impl.mysql;
 
 import dao.abstraction.AccountDao;
-import dao.impl.mysql.converter.DtoAccountConverter;
+import dao.impl.mysql.converter.AccountDtoConverter;
 import dao.impl.mysql.converter.DtoConverter;
 import entity.Account;
 import entity.User;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class MySqlAccountDao implements AccountDao {
+public class AccountMySqlDao implements AccountDao {
     private final static String SELECT_ALL =
             "SELECT accounts.account_number, accounts.account_holder, " +
                     "accounts.balance, accounts.status, " +
@@ -64,16 +64,16 @@ public class MySqlAccountDao implements AccountDao {
     private final DefaultDaoImpl<Account> defaultDao;
 
 
-    public MySqlAccountDao(Connection connection) {
-        this(connection, new DtoAccountConverter());
+    public AccountMySqlDao(Connection connection) {
+        this(connection, new AccountDtoConverter());
     }
 
-    public MySqlAccountDao(Connection connection,
+    public AccountMySqlDao(Connection connection,
                            DtoConverter<Account> converter) {
         this.defaultDao = new DefaultDaoImpl<>(connection, converter);
     }
 
-    public MySqlAccountDao(DefaultDaoImpl<Account> defaultDao) {
+    public AccountMySqlDao(DefaultDaoImpl<Account> defaultDao) {
         this.defaultDao = defaultDao;
     }
 
